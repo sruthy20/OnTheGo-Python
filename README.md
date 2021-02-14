@@ -1,2 +1,2 @@
 # OnTheGo-Python
-Bus Travel card system implemented using python frameworks
+Travel card system implemented using python frameworks
