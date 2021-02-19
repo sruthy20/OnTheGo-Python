@@ -1,6 +1,8 @@
+from flask.wrappers import Response
 from . import app_create
+from . import sqlqueries
 from .models import User,Admin,db
-import requests
+from flask import request
 import json
 
 app=app_create()
@@ -12,27 +14,36 @@ def landing():
 @app.route("/login",methods=['POST']) 
 
 def login():
-    data=requests.get_json()
+    data=request.get_json()
     name=data['name']
     password=data['password']
 
-    user=User(name=name,password=password)
-    
-    db.session.add(user)
-    db.session.commit()
+    sqlqueries.logininsert(User,name=name,password=password)
+    return json.dumps("Added"), 200
 
 @app.route("/signup",methods=['POST'])    
 def UserSignIn():
-    data=requests.get_json()
+    data=request.get_json()
     name=data['name']
     email=data['email']
     password=data['password']
     user=User(name=name,email=email,password=password)
-    
-    db.session.add(user)
-    db.session.commit()
-    return json.dumps('Added')
+    sqlqueries.signupinsert(User,user)
+    Response.status_code=200
+    return Response
+    #return json.dumps('Added')
 
+@app.route("/login/admin",methods=['POST']) 
+
+def login_admin():
+    data=request.get_json()
+    name=data['name']
+    password=data['password']
+
+    user=Admin(name=name,password=password)
+    sqlqueries.logininsert(Admin,user)
+    Response.status_code=200
+    return Response
 
 
 

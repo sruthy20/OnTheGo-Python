@@ -1,7 +1,8 @@
 from flask import Flask
 import flask_sqlalchemy
 from  .models import db
-from . import onthegoconfig
+from .. import onthegoconfig
+
 def app_create():
     flask_app=Flask(__name__)
     flask_app.config['SQLALCHEMY_DATABASE_URI']=onthegoconfig.DATABASE_CONNECTION_URI
