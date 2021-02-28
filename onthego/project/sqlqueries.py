@@ -8,9 +8,8 @@ def logininsert(model,**kwargs):
 
 
 def signupinsert(model,**kwargs):
-   # val=model(**kwargs)
-
-    db.session.add(**kwargs)
+    val=model(**kwargs)
+    db.session.add(val)
     code_commit()
 
 def code_commit():

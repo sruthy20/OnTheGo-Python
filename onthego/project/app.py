@@ -27,11 +27,12 @@ def UserSignIn():
     name=data['name']
     email=data['email']
     password=data['password']
-    user=User(name=name,email=email,password=password)
-    sqlqueries.signupinsert(User,user)
-    Response.status_code=200
-    return Response
-    #return json.dumps('Added')
+    #user=User(name=name,email=email,password=password)
+    sqlqueries.signupinsert(User,name=name,email=email,password=password)
+    
+    return json.dumps("User signe up completed, email is sent"), 200
+    
+    
 
 @app.route("/login/admin",methods=['POST']) 
 
